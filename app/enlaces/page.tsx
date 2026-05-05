@@ -5,79 +5,102 @@ import { api } from '@/lib/api';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import EnlacesContent from '@/components/enlaces-content';
+import PageHero from '@/components/page-hero';
 
 export default function EnlacesPage() {
-  const [portada, setPortada] = useState<string>('');
   const [loading, setLoading] = useState(true);
-  const [colors, setColors] = useState({ 
-    primario: '#10b981', 
-    secundario: '#f59e0b', 
-    terciario: '#06b6d4' 
+
+  const [colors, setColors] = useState({
+    primario: '#10b981',
+    secundario: '#f59e0b',
+    terciario: '#06b6d4',
   });
 
   useEffect(() => {
     const cargar = async () => {
       try {
-        const [instData, contentData] = await Promise.all([
-          api.institution.getCurrentPrincipal(),
-          api.content.getAll()
-        ]);
-        
-        if (contentData.portada && contentData.portada.length > 0) {
-          setPortada(contentData.portada[0].portada_imagen);
-        }
-        
+        const instData = await api.institution.getCurrentPrincipal();
+
         if (instData.colorinstitucion?.[0]) {
           const c = instData.colorinstitucion[0];
+
           setColors({
-            primario: c.color_primario,
-            secundario: c.color_secundario,
-            terciario: c.color_terciario
+            primario: c.color_primario || '#10b981',
+            secundario: c.color_secundario || '#f59e0b',
+            terciario: c.color_terciario || '#06b6d4',
           });
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error cargando colores institucionales:', error);
       } finally {
         setLoading(false);
       }
     };
+
     cargar();
   }, []);
 
-  return (
-    <div className="min-h-screen bg-slate-950">
-      <Navbar />
-      
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 -z-20">
-          {portada ? (
-            <>
-              <img src={portada} alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-slate-950/75" />
-            </>
-          ) : (
-            <div className="absolute inset-0 bg-slate-900" />
-          )}
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute left-1/2 top-[-8rem] h-[130%] w-[48rem] origin-top -translate-x-[88%] -rotate-[30deg] rounded-full blur-[80px] opacity-65"
+            style={{
+              background: `linear-gradient(180deg, ${colors.primario}99 0%, ${colors.secundario}55 42%, transparent 80%)`,
+            }}
+          />
+
+          <div
+            className="absolute left-1/2 top-[-8rem] h-[130%] w-[48rem] origin-top -translate-x-[12%] rotate-[30deg] rounded-full blur-[80px] opacity-65"
+            style={{
+              background: `linear-gradient(180deg, ${colors.terciario}99 0%, ${colors.primario}55 42%, transparent 80%)`,
+            }}
+          />
+
+          <div className="absolute inset-0 bg-white/45" />
+
+          <div className="absolute inset-0 opacity-[0.045] bg-[linear-gradient(rgba(15,23,42,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.45)_1px,transparent_1px)] bg-[size:72px_72px]" />
         </div>
 
-        <div className="absolute inset-0 -z-10 bg-construction-grid opacity-20 pointer-events-none" />
+        <div className="relative z-10 flex items-center gap-4 px-7 py-5 rounded-3xl border border-white/80 bg-white/75 backdrop-blur-xl shadow-2xl shadow-slate-300/40">
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center border"
+            style={{
+              color: colors.primario,
+              borderColor: `${colors.primario}55`,
+              backgroundColor: `${colors.primario}12`,
+              boxShadow: `0 18px 40px ${colors.primario}25`,
+            }}
+          >
+            <span className="w-6 h-6 rounded-full border-2 border-current border-t-transparent animate-spin" />
+          </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center py-20">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
-            Enlaces
-          </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-8">
-            Accesos directos a portales institucionales y recursos externos
-          </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
-            <a href="/" className="hover:text-white transition-colors">Inicio</a>
-            <span className="text-slate-600">/</span>
-            <span style={{ color: colors.primario }}>Enlaces</span>
+          <div>
+            <p className="text-slate-900 text-lg font-black">
+              Cargando enlaces
+            </p>
+            <p className="text-slate-500 text-sm">
+              Preparando accesos institucionales...
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar />
+
+      <PageHero
+        title="Enlaces"
+        breadcrumb="Enlaces"
+        colors={colors}
+      />
 
       <EnlacesContent colors={colors} />
+
       <Footer />
     </div>
   );

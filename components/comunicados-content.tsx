@@ -30,7 +30,6 @@ export default function ComunicadosContent({ colors }: ComunicadosContentProps) 
           api.content.getAll()
         ]);
         
-        // Filtrar SOLO comunicados (estricto)
         const todos = eventsData.convocatorias || [];
         const soloComunicados = todos.filter(c => {
           const tipo = c.tipo_conv_comun?.tipo_conv_comun_titulo?.toLowerCase() || '';

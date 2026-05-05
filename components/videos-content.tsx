@@ -91,8 +91,7 @@ export default function VideosContent({ colors }: VideosContentProps) {
 
   return (
     <section className="py-24 px-4 relative overflow-hidden bg-slate-950">
-      
-      {/* ✅ SIN MODAL - Videos se abren en YouTube (nueva pestaña) */}
+       
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
@@ -115,11 +114,11 @@ export default function VideosContent({ colors }: VideosContentProps) {
                       className="tech-card overflow-hidden hover:scale-[1.02] transition-transform group"
                       style={{ borderColor: `${colors.primario}30` }}
                     >
-                      {/* Miniatura - Click para abrir en YouTube */}
+                    
                       <div 
                         className="relative aspect-video cursor-pointer"
                         onClick={() => {
-                          // ✅ Abrir video en nueva pestaña
+                         
                           if (video.video_enlace) {
                             window.open(video.video_enlace, '_blank', 'noopener,noreferrer');
                           }
@@ -143,14 +142,12 @@ export default function VideosContent({ colors }: VideosContentProps) {
                           </div>
                         )}
                         
-                        {/* Botón con ícono de enlace externo */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm border-4 border-white flex items-center justify-center group-hover:scale-110 group-hover:bg-white transition-all shadow-lg">
                             <ExternalLink className="w-7 h-7 text-slate-900" />
                           </div>
                         </div>
                         
-                        {/* Badge "Ver en YouTube" */}
                         <span className="absolute bottom-2 right-2 px-2 py-1 rounded bg-red-600 text-white text-xs font-medium flex items-center gap-1">
                           <Play className="w-3 h-3" fill="white" /> YouTube
                         </span>
@@ -171,7 +168,7 @@ export default function VideosContent({ colors }: VideosContentProps) {
             )}
           </div>
 
-          {/* Sidebar */}
+           
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               <div className="text-center pb-4 border-b border-slate-800">

@@ -1,15 +1,9 @@
-// lib/api.ts
-
-// ============================================
-// CONFIGURACIÓN Y CLIENTE HTTP
-// ============================================
-
+ 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_V2 = process.env.NEXT_PUBLIC_API_V2;
 const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 const INSTITUCION_ID = process.env.NEXT_PUBLIC_INSTITUCION_ID;
-
-// Cliente HTTP base
+ 
 const apiClient = {
   baseUrl: API_V2,
   token: API_TOKEN,
@@ -50,11 +44,7 @@ const apiClient = {
     return `${API_BASE_URL}/storage/imagenes/instituciones/${imagePath}`;
   }
 };
-
-// ============================================
-// TIPOS / INTERFACES
-// ============================================
-
+ 
 export interface ColorInstitucion {
   id_color: number;
   color_primario: string;
@@ -231,11 +221,7 @@ export interface OfertaAcademica {
   ofertas_referencia: string;
   ofertas_estado: number;
 }
-
-// ============================================
-// SERVICIOS - INSTITUCIÓN PRINCIPAL
-// ============================================
-
+ 
 export const institutionApi = {
   async getPrincipal(id?: string | number): Promise<DescripcionInstitucion> {
     const institucionId = id || apiClient.institucionId;
@@ -249,11 +235,7 @@ export const institutionApi = {
     return this.getPrincipal();
   },
 };
-
-// ============================================
-// SERVICIOS - CONTENIDO (Autoridades, Portada, Videos)
-// ============================================
-
+ 
 export const contentApi = {
   async getAll(): Promise<{
     autoridad: Autoridad[];
@@ -284,11 +266,7 @@ export const contentApi = {
     return data.upea_videos;
   },
 };
-
-// ============================================
-// SERVICIOS - RECURSOS (Publicaciones, Links)
-// ============================================
-
+ 
 export const resourcesApi = {
   async getAll(): Promise<{
     upea_publicaciones: Publicacion[];
@@ -308,11 +286,7 @@ export const resourcesApi = {
     return data.linksExternoInterno.filter(link => link.estado === 1);
   },
 };
-
-// ============================================
-// SERVICIOS - EVENTOS, GACETAS, CURSOS, etc.
-// ============================================
-
+ 
 export const eventsApi = {
   async getAll(): Promise<{
     upea_gaceta_universitaria: Gaceta[];
@@ -355,11 +329,7 @@ export const eventsApi = {
     return data.ofertasAcademicas;
   },
 };
-
-// ============================================
-// UTILIDADES
-// ============================================
-
+ 
 export const utils = {
   buildImageUrl: apiClient.buildImageUrl.bind(apiClient),
   
@@ -375,11 +345,7 @@ export const utils = {
     return html.replace(/<[^>]*>/g, '');
   },
 };
-
-// ============================================
-// EXPORT POR DEFECTO (opcional)
-// ============================================
-
+ 
 export const api = {
   institution: institutionApi,
   content: contentApi,

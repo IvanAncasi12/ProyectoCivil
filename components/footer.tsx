@@ -7,13 +7,12 @@ import {
 } from 'lucide-react';
 import { api, utils } from '@/lib/api';
 
-// Enlaces rápidos del sitio
 const navLinks = [
-  { name: 'Inicio', href: '#inicio' },
-  { name: 'Sobre Nosotros', href: '#about' },
-  { name: 'Ofertas Académicas', href: '#projects' },
-  { name: 'Autoridades', href: '#team' },
-  { name: 'Contacto', href: '#contacto' }
+  { name: 'Inicio', href: '/' },
+  { name: 'Sobre Nosotros', href: '/nosotros' },
+  { name: 'Ofertas Académicas', href: '/ofertas' },
+  { name: 'Enlaces', href: '/enlaces' },
+  { name: 'Contacto', href: '/contacto' }
 ];
 
 export default function Footer() {

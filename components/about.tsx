@@ -172,10 +172,6 @@ export default function About() {
   );
 }
  
-// ============================================
-// COMPONENTE DE VIDEO - CORREGIDO
-// ============================================
-
 function VideoSection({ colors, institucion }: { colors: any, institucion: DescripcionInstitucion | null }) {
   const videoUrl = institucion?.institucion_link_video_vision;
 
