@@ -183,7 +183,7 @@ export default async function RootLayout({
 
       <body className="font-sans antialiased bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
   )
