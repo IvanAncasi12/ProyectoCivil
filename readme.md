@@ -1,17 +1,57 @@
-Project setup
-npm install
+# Project Setup
 
-Id Carrera/Institudion
+## Install dependencies
+
+```bash
+pnpm install
+```
+
+## Configure environment variables
+
+```bash
 cp .env.copy .env
+```
 
-Lints and fixes files
-npm run lint
+Editar el archivo `.env` y configurar el ID de Carrera/Institución correspondiente.
 
-Compiles and hot-reloads for development
-npm run dev
+## Development mode
 
-Lints and fixes files
-npm run lint
+```bash
+pnpm dev
+```
 
-Compiles and minifies for production
-npm run build
+La aplicación estará disponible en:
+
+```txt
+http://localhost:3000
+```
+
+## Lint
+
+```bash
+pnpm lint
+```
+
+## Production build
+
+```bash
+pnpm build
+```
+
+## Run production server
+
+```bash
+pnpm start
+```
+
+## Security Audit
+
+```bash
+pnpm audit
+```
+
+Verificar que el resultado sea:
+
+```txt
+No known vulnerabilities found
+```
