@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const isDev = process.env.NODE_ENV !== 'production'
-
 const nextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
@@ -21,9 +19,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https:",
               "font-src 'self' data: https:",
               "style-src 'self' 'unsafe-inline' https:",
-              isDev
-                ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:"
-                : "script-src 'self' https:",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:",
               "connect-src 'self' https: http:",
               "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://maps.google.com",
               "media-src 'self' https: blob:",
